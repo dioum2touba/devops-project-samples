@@ -14,7 +14,7 @@ variables:
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
   # Azure service connection established during pipeline creation
-  azureSubscription: 'Serigne Dioume – MSDN'
+  azureSubscription: 'Serigne Dioume – MSDN(897dffae-66d3-40c3-aa75-409294baa9c0)'
   appName: 'keyvaultDemo-functApp'
   # Agent VM image name
   vmImageName: 'windows-latest'
@@ -39,10 +39,11 @@ steps:
     configuration: '$(buildConfiguration)'
 
 
+## Add the below snippet at the end of your pipeline
 - task: AzureFunctionApp@1
   displayName: Azure Function App Deploy
   inputs:
     azureSubscription: $(azureSubscription)
     appType: functionApp
     appName: $(appName)
-    package: $(System.DefaultWorkingDirectory)/**/*.zip
+    package: $(System.ArtifactsDirectory)/**/*.zip
