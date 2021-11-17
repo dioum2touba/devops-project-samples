@@ -38,9 +38,10 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
-- task: AzureFunctionApp@1 # Add this at the end of your file
+- task: AzureFunctionApp@1
   inputs:
-    azureSubscription: <Azure service connection>
-    appType: functionAppLinux
-    appName: $(appName)
-    package: $(System.ArtifactsDirectory)/**/*.zip
+    azureSubscription: 'Serigne Dioume – MSDN(897dffae-66d3-40c3-aa75-409294baa9c0)'
+    appType: 'functionAppLinux'
+    appName: 'keyvaultDemo-functApp'
+    package: '$(System.DefaultWorkingDirectory)/**/*.zip'
+    runtimeStack: 'DOTNET|3.1'
