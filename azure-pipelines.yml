@@ -38,16 +38,10 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
-- task: DotNetCoreCLI@2
-  displayName: Publish
+
+- task: AzureFunctionApp@1 # Add this at the end of your file
   inputs:
-    command: 'publish'
-    publishWebProjects: false
-    projects: '**/*.csproj'
-    arguments: '--configuration $(buildConfiguration) --output $(build.artifactstagingdirectory)'
-    zipAfterPublish: True
-    
-- task: PublishBuildArtifacts@1
-  displayName: 'Publish Artifact'
-  inputs:
-    PathtoPublish: '$(build.artifactstagingdirectory)'
+    azureSubscription: $(azureSubscription)
+    appType: functionApp
+    appName: $(appName)
+    package: $(System.ArtifactsDirectory)/**/*.zip
