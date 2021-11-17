@@ -38,16 +38,16 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
-- task: PublishBuildArtifacts@1
+- task: PublishPipelineArtifact@1
   inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'PublishArtifact'
-    publishLocation: 'Container'
+    targetPath: '$(Pipeline.Workspace)'
+    artifact: 'deployArtifact'
+    publishLocation: 'pipeline'
 
 - task: AzureFunctionApp@1
   inputs:
     azureSubscription: 'Serigne Dioume – MSDN(897dffae-66d3-40c3-aa75-409294baa9c0)'
     appType: 'functionAppLinux'
     appName: 'keyvaultDemo-functApp'
-    package: '$(Build.ArtifactStagingDirectory)/**/*.zip'
+    package: '$(Pipeline.Workspace)/**/*.zip'
     runtimeStack: 'DOTNET|3.1'
